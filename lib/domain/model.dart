@@ -6,7 +6,7 @@ class Source {
 }
 
 class ArticleData {
-  Source source;
+  Source? source;
   String author;
   String title;
   String description;
@@ -33,7 +33,7 @@ class Articles {
   );
 }
 
-class HomeObject {
+class News {
   Articles articles;
-  HomeObject(this.articles);
+  News(this.articles);
 }
