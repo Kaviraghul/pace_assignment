@@ -9,7 +9,7 @@ part of 'responses.dart';
 // **************************************************************************
 
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse()
-  ..status = json['status'] as int?
+  ..status = json['status'] as String?
   ..message = json['message'] as String?;
 
 Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
@@ -74,7 +74,7 @@ NewsResponse _$NewsResponseFromJson(Map<String, dynamic> json) => NewsResponse(
           ? null
           : ArticlesResponse.fromJson(json['data'] as Map<String, dynamic>),
     )
-      ..status = json['status'] as int?
+      ..status = json['status'] as String?
       ..message = json['message'] as String?;
 
 Map<String, dynamic> _$NewsResponseToJson(NewsResponse instance) =>

@@ -1,5 +1,5 @@
 class Failure {
-  int code;
+  String code;
   String message;
 
   Failure(this.code, this.message);
