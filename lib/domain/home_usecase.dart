@@ -5,9 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:pace_assignment/domain/base_usecase.dart';
 import 'package:pace_assignment/domain/repository.dart';
 
-class NewsUseCase extends BaseUseCase {
+class HomeUseCase extends BaseUseCase {
   Repository _repository;
-  NewsUseCase(this._repository);
+  HomeUseCase(this._repository);
   @override
   Future<Either<Failure, dynamic>> execute(input) {
     return _repository.getNews();
