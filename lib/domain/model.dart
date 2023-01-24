@@ -34,6 +34,6 @@ class Articles {
 }
 
 class News {
-  Articles articles;
-  News(this.articles);
+  Articles data;
+  News(this.data);
 }
