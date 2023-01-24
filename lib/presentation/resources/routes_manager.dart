@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/presentation/home/home_view.dart';
 import 'package:pace_assignment/presentation/resources/strings_manager.dart';
 
@@ -10,6 +11,7 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.mainRoute:
+        initHomeModule();
         return MaterialPageRoute(builder: (_) => const HomeView());
       default:
         return unDefinedRoute();

@@ -34,7 +34,7 @@ class _AppServiceClient implements AppServiceClient {
     )
             .compose(
               _dio.options,
-              '/v2/top-headlines?sources=techcrunch&apiKey=cd4d10b130bd4619bb15d506cc5c6fdf}',
+              '/v2/top-headlines?sources=techcrunch&apiKey=cd4d10b130bd4619bb15d506cc5c6fdf',
               queryParameters: queryParameters,
               data: _data,
             )
