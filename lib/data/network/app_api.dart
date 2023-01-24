@@ -11,6 +11,6 @@ part 'app_api.g.dart';
 abstract class AppServiceClient {
   factory AppServiceClient(Dio Dio, {String baseUrl}) = _AppServiceClient;
 
-  @GET("/v2/top-headlines?sources=techcrunch&apiKey=`${Constant.token}`")
-  Future<NewsResponse> getNews();
+  @GET("/v2/top-headlines?sources=techcrunch&apiKey=${Constant.token}")
+  Future<HomeResponce> getNews();
 }

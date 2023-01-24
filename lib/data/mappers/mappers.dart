@@ -16,9 +16,9 @@ extension SourceResponseMapper on SourceResponse? {
   }
 }
 
-extension ArticleDataResponseMapper on ArticleDataResponse? {
-  ArticleData toDomain() {
-    return ArticleData(
+extension ArticleResponseMapper on ArticleResponse? {
+  Article toDomain() {
+    return Article(
       this?.source?.toDomain(),
       this?.author?.orEmpty() ?? EMPTY,
       this?.title?.orEmpty() ?? EMPTY,
@@ -31,15 +31,10 @@ extension ArticleDataResponseMapper on ArticleDataResponse? {
   }
 }
 
-extension NewsResponseMapper on NewsResponse? {
-  News toDomain() {
-    List<ArticleData> mappedArticles =
-        (this?.data?.articles.map((articles) => articles.toDomain()) ??
-                const Iterable.empty())
-            .cast<ArticleData>()
-            .toList();
-
-    var data = Articles(mappedArticles);
-    return News(data);
+extension NewsResponseMapper on HomeResponce? {
+  Home toDomain() {
+    List<Article> mappedArticles =
+        (this?.articles?.map((article) => article.toDomain()) ?? const Iterable.empty()).cast<Article>().toList();
+    return Home(mappedArticles);
   }
 }

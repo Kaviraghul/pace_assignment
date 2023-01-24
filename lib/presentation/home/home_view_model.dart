@@ -13,8 +13,7 @@ class HomeViewModel extends BaseViewModel
   HomeUseCase _homeUseCase;
   HomeViewModel(this._homeUseCase);
 
-  StreamController _articleStreamController =
-      BehaviorSubject<List<ArticleData>>();
+  StreamController _articleStreamController = BehaviorSubject<List<Article>>();
 
   @override
   void dispose() {
@@ -27,14 +26,15 @@ class HomeViewModel extends BaseViewModel
   }
 
   _getHome() async {
-    (await _homeUseCase.execute(Void)).fold((l) => null, (homeObject) => inputArticles.add(homeObject.data.articles));
+    (await _homeUseCase.execute(Void)).fold(
+        (l) => null, (homeObject) => inputArticles.add(homeObject.articles));
   }
 
   @override
   Sink get inputArticles => _articleStreamController.sink;
 
   @override
-  Stream<List<ArticleData>> get outputArticles =>
+  Stream<List<Article>> get outputArticles =>
       _articleStreamController.stream.map((article) => article);
 }
 
@@ -43,5 +43,5 @@ abstract class HomeViewModelInput {
 }
 
 abstract class HomeViewModelOutput {
-  Stream<List<ArticleData>> get outputArticles;
+  Stream<List<Article>> get outputArticles;
 }

@@ -6,11 +6,11 @@ import 'package:pace_assignment/domain/base_usecase.dart';
 import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/domain/repository.dart';
 
-class HomeUseCase extends BaseUseCase<void, News> {
+class HomeUseCase extends BaseUseCase<void, Home> {
   Repository _repository;
   HomeUseCase(this._repository);
   @override
-  Future<Either<Failure, News>> execute(void input) async {
+  Future<Either<Failure, Home>> execute(void input) async {
     return await _repository.getNews();
   }
 }
