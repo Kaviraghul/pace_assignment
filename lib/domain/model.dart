@@ -5,7 +5,7 @@ class Source {
   Source(this.id, this.name);
 }
 
-class ArticleData {
+class Article {
   Source? source;
   String author;
   String title;
@@ -14,7 +14,7 @@ class ArticleData {
   String urlToImage;
   String publishedAt;
   String content;
-  ArticleData(
+  Article(
     this.source,
     this.author,
     this.title,
@@ -26,14 +26,7 @@ class ArticleData {
   );
 }
 
-class Articles {
-  List<ArticleData> articles;
-  Articles(
-    this.articles,
-  );
-}
-
-class News {
-  Articles articles;
-  News(this.articles);
+class Home {
+  List<Article> articles;
+  Home(this.articles);
 }

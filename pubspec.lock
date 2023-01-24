@@ -221,6 +221,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  get_it:
+    dependency: "direct main"
+    description:
+      name: get_it
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.2.0"
   glob:
     dependency: transitive
     description:
@@ -340,6 +347,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.1"
+  pretty_dio_logger:
+    dependency: "direct main"
+    description:
+      name: pretty_dio_logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0-beta-1"
   pub_semver:
     dependency: transitive
     description:
@@ -368,6 +382,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.0"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.27.7"
   shelf:
     dependency: transitive
     description:

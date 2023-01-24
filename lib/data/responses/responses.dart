@@ -5,32 +5,23 @@ import 'package:json_annotation/json_annotation.dart';
 part 'responses.g.dart';
 
 @JsonSerializable()
-class BaseResponse {
-  @JsonKey(name: "status")
-  String? status;
-  @JsonKey(name: "message")
-  String? message;
-}
-
-@JsonSerializable()
 class SourceResponse {
   @JsonKey(name: "id")
   String? id;
   @JsonKey(name: "name")
   String? name;
 
-  SourceResponse(this.id, this.name);
+  SourceResponse({this.id, this.name});
 
   // from json
   factory SourceResponse.fromJson(Map<String, dynamic> json) =>
       _$SourceResponseFromJson(json);
 
-  // to json
   Map<String, dynamic> toJson() => _$SourceResponseToJson(this);
 }
 
 @JsonSerializable()
-class ArticleDataResponse {
+class ArticleResponse {
   @JsonKey(name: "source")
   SourceResponse? source;
   @JsonKey(name: "author")
@@ -48,43 +39,31 @@ class ArticleDataResponse {
   @JsonKey(name: "content")
   String? content;
 
-  ArticleDataResponse(this.source, this.author, this.title, this.description,
+  ArticleResponse(this.source, this.author, this.title, this.description,
       this.url, this.urlToImage, this.publishedAt, this.content);
 
-  // from json
-  factory ArticleDataResponse.fromJson(Map<String, dynamic> json) =>
-      _$ArticleDataResponseFromJson(json);
+  factory ArticleResponse.fromJson(Map<String, dynamic> json) =>
+      _$ArticleResponseFromJson(json);
 
-  // to json
-  Map<String, dynamic> toJson() => _$ArticleDataResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ArticleResponseToJson(this);
 }
 
 @JsonSerializable()
-class ArticlesResponse {
+class HomeResponce {
+  @JsonKey(name: "status")
+  String? status;
+  @JsonKey(name: "totalResults")
+  int? totalResults;
   @JsonKey(name: "articles")
-  List<ArticleDataResponse> articles;
+  List<ArticleResponse>? articles;
 
-  ArticlesResponse(this.articles);
-
-  // from json
-  factory ArticlesResponse.fromJson(Map<String, dynamic> json) =>
-      _$ArticlesResponseFromJson(json);
-
-  // to json
-  Map<String, dynamic> toJson() => _$ArticlesResponseToJson(this);
-}
-
-@JsonSerializable()
-class NewsResponse extends BaseResponse {
-  @JsonKey(name: "data")
-  ArticlesResponse? data;
-
-  NewsResponse(this.data);
+  HomeResponce(this.status, this.totalResults, this.articles);
 
   // from json
-  factory NewsResponse.fromJson(Map<String, dynamic> json) =>
-      _$NewsResponseFromJson(json);
+  factory HomeResponce.fromJson(Map<String, dynamic> json) =>
+      _$HomeResponceFromJson(json);
 
   // to json
-  Map<String, dynamic> toJson() => _$NewsResponseToJson(this);
+  Map<String, dynamic> toJson() => _$HomeResponceToJson(this);
 }
+

@@ -1,27 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: unused_element
-
 part of 'responses.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse()
-  ..status = json['status'] as String?
-  ..message = json['message'] as String?;
-
-Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'message': instance.message,
-    };
-
 SourceResponse _$SourceResponseFromJson(Map<String, dynamic> json) =>
     SourceResponse(
-      json['id'] as String?,
-      json['name'] as String?,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$SourceResponseToJson(SourceResponse instance) =>
@@ -30,8 +18,8 @@ Map<String, dynamic> _$SourceResponseToJson(SourceResponse instance) =>
       'name': instance.name,
     };
 
-ArticleDataResponse _$ArticleDataResponseFromJson(Map<String, dynamic> json) =>
-    ArticleDataResponse(
+ArticleResponse _$ArticleResponseFromJson(Map<String, dynamic> json) =>
+    ArticleResponse(
       json['source'] == null
           ? null
           : SourceResponse.fromJson(json['source'] as Map<String, dynamic>),
@@ -44,8 +32,7 @@ ArticleDataResponse _$ArticleDataResponseFromJson(Map<String, dynamic> json) =>
       json['content'] as String?,
     );
 
-Map<String, dynamic> _$ArticleDataResponseToJson(
-        ArticleDataResponse instance) =>
+Map<String, dynamic> _$ArticleResponseToJson(ArticleResponse instance) =>
     <String, dynamic>{
       'source': instance.source,
       'author': instance.author,
@@ -57,29 +44,17 @@ Map<String, dynamic> _$ArticleDataResponseToJson(
       'content': instance.content,
     };
 
-ArticlesResponse _$ArticlesResponseFromJson(Map<String, dynamic> json) =>
-    ArticlesResponse(
-      (json['articles'] as List<dynamic>)
-          .map((e) => ArticleDataResponse.fromJson(e as Map<String, dynamic>))
+HomeResponce _$HomeResponceFromJson(Map<String, dynamic> json) => HomeResponce(
+      json['status'] as String?,
+      json['totalResults'] as int?,
+      (json['articles'] as List<dynamic>?)
+          ?.map((e) => ArticleResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$ArticlesResponseToJson(ArticlesResponse instance) =>
-    <String, dynamic>{
-      'articles': instance.articles,
-    };
-
-NewsResponse _$NewsResponseFromJson(Map<String, dynamic> json) => NewsResponse(
-      json['data'] == null
-          ? null
-          : ArticlesResponse.fromJson(json['data'] as Map<String, dynamic>),
-    )
-      ..status = json['status'] as String?
-      ..message = json['message'] as String?;
-
-Map<String, dynamic> _$NewsResponseToJson(NewsResponse instance) =>
+Map<String, dynamic> _$HomeResponceToJson(HomeResponce instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'message': instance.message,
-      'data': instance.data,
+      'totalResults': instance.totalResults,
+      'articles': instance.articles,
     };

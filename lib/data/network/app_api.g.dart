@@ -21,25 +21,25 @@ class _AppServiceClient implements AppServiceClient {
   String? baseUrl;
 
   @override
-  Future<NewsResponse> getNews() async {
+  Future<HomeResponce> getNews() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<NewsResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<HomeResponce>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/v2/top-headlines?sources=techcrunch&apiKey=cd4d10b130bd4619bb15d506cc5c6fdf}',
+              '/v2/top-headlines?sources=techcrunch&apiKey=cd4d10b130bd4619bb15d506cc5c6fdf',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = NewsResponse.fromJson(_result.data!);
+    final value = HomeResponce.fromJson(_result.data!);
     return value;
   }
 
