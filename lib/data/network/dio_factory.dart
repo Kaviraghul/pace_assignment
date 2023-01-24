@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, prefer_final_fields, constant_identifier_names, no_leading_underscores_for_local_identifiers
+// ignore_for_file: unused_local_variable, prefer_final_fields, constant_identifier_names, no_leading_underscores_for_local_identifiers, unused_field
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +17,7 @@ class DioFactory {
 
   DioFactory(this._appPreferences);
 
-  Future<Dio> getDio() async {  
+  Future<Dio> getDio() async {
     Dio dio = Dio();
     int _timeOut = 60 * 1000; // 1min
 
@@ -27,7 +27,6 @@ class DioFactory {
       receiveTimeout: _timeOut,
     );
 
-    // this logger must only pring when it is in deug mode not in release mode
     if (kReleaseMode) {
       // ignore: avoid_print
       print("release mode on logs");
