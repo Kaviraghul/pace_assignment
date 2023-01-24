@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({ Key? key }) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -10,8 +10,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return const Center(
+      child: Text("home view"),
     );
   }
 }
