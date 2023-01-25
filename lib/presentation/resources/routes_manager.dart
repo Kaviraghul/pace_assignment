@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/di.dart';
+import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/presentation/home/home_view.dart';
 import 'package:pace_assignment/presentation/news_article/news_article_view.dart';
 import 'package:pace_assignment/presentation/resources/strings_manager.dart';
@@ -16,8 +17,7 @@ class RouteGenerator {
         initHomeModule();
         return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.articleRoute:
-        initHomeModule();
-        return MaterialPageRoute(builder: (_) => const NewsArticleView());
+        return MaterialPageRoute(builder: (_) => NewsArticleView());
       default:
         return unDefinedRoute();
     }

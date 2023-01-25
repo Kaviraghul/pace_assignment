@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pace_assignment/domain/model.dart';
 
-class NewsArticleView extends StatefulWidget {
-  const NewsArticleView({Key? key}) : super(key: key);
+class NewsArticleView extends StatelessWidget {
+  Article article;
+  NewsArticleView(Key? key, this.article) : super(key: key);
 
-  @override
-  _NewsArticleViewState createState() => _NewsArticleViewState();
-}
-
-class _NewsArticleViewState extends State<NewsArticleView> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Text("article page"),
+    );
   }
 }

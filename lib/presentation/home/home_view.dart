@@ -1,11 +1,12 @@
-
 // ignore_for_file: library_private_types_in_public_api, prefer_final_fields, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/presentation/home/home_view_model.dart';
+import 'package:pace_assignment/presentation/news_article/news_article_view.dart';
 import 'package:pace_assignment/presentation/resources/color_manager.dart';
+import 'package:pace_assignment/presentation/resources/routes_manager.dart';
 import 'package:pace_assignment/presentation/resources/strings_manager.dart';
 import 'package:pace_assignment/presentation/resources/values_manager.dart';
 
@@ -65,89 +66,93 @@ class _HomeViewState extends State<HomeView> {
               .map(
                 (article) => Column(
                   children: [
-                    Card(
-                      elevation: AppSize.s4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppSize.s12),
-                      ),
-                      child: Column(children: [
-                        Stack(
-                          alignment: Alignment.bottomRight,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(AppSize.s8),
-                              child: Container(
-                                height: AppSize.s260,
-                                width: AppSize.s400,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                  image: NetworkImage(article.urlToImage),
-                                  fit: BoxFit.cover,
-                                  // colorFilter: ColorFilter.mode(
-                                  //   ColorManager.black.withOpacity(0.5),
-                                  //   BlendMode.darken,
-                                  // ),
-                                )),
-                              ),
-                            ),
-                            Container(
-                              height: AppSize.s260,
-                              width: AppSize.s400,
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.transparent,
-                                    Colors.black,
-                                    Colors.black,
-                                    Colors.black
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  stops: [0, 0.7, 0.9, 1],
+                    InkWell(
+                      onTap: () => Navigator.pushReplacementNamed(
+                          context, Routes.articleRoute),
+                      child: Card(
+                        elevation: AppSize.s4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppSize.s12),
+                        ),
+                        child: Column(children: [
+                          Stack(
+                            alignment: Alignment.bottomRight,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(AppSize.s8),
+                                child: Container(
+                                  height: AppSize.s260,
+                                  width: AppSize.s400,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: NetworkImage(article.urlToImage),
+                                    fit: BoxFit.cover,
+                                    // colorFilter: ColorFilter.mode(
+                                    //   ColorManager.black.withOpacity(0.5),
+                                    //   BlendMode.darken,
+                                    // ),
+                                  )),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(AppPadding.p12),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    article.title,
-                                    style:
-                                        Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                  const SizedBox(
-                                    height: AppSize.s12,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        article.source!.name,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(
-                                        width: AppSize.s20,
-                                      ),
-                                      Text(
-                                        article.publishedAt,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2,
-                                      )
+                              Container(
+                                height: AppSize.s260,
+                                width: AppSize.s400,
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.black,
+                                      Colors.black,
+                                      Colors.black
                                     ],
-                                  )
-                                ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    stops: [0, 0.7, 0.9, 1],
+                                  ),
+                                ),
                               ),
-                            )
-                          ],
-                        )
-                      ]),
+                              Padding(
+                                padding: const EdgeInsets.all(AppPadding.p12),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      article.title,
+                                      style:
+                                          Theme.of(context).textTheme.subtitle1,
+                                    ),
+                                    const SizedBox(
+                                      height: AppSize.s12,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          article.source!.name,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle2,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(
+                                          width: AppSize.s20,
+                                        ),
+                                        Text(
+                                          article.publishedAt,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle2,
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ]),
+                      ),
                     ),
                     const SizedBox(
                       height: AppSize.s24,
