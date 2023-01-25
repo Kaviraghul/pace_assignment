@@ -67,3 +67,32 @@ class HomeResponce {
   Map<String, dynamic> toJson() => _$HomeResponceToJson(this);
 }
 
+
+@JsonSerializable()
+class SelectedArticleResponse {
+  @JsonKey(name: "source")
+  SourceResponse? source;
+  @JsonKey(name: "author")
+  String? author;
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "description")
+  String? description;
+  @JsonKey(name: "url")
+  String? url;
+  @JsonKey(name: "urlToImage")
+  String? urlToImage;
+  @JsonKey(name: "publishedAt")
+  String? publishedAt;
+  @JsonKey(name: "content")
+  String? content;
+
+  SelectedArticleResponse(this.source, this.author, this.title, this.description,
+      this.url, this.urlToImage, this.publishedAt, this.content);
+
+  factory SelectedArticleResponse.fromJson(Map<String, dynamic> json) =>
+      _$SelectedArticleResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SelectedArticleResponseToJson(this);
+}
+
