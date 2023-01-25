@@ -17,7 +17,7 @@ class RouteGenerator {
         initHomeModule();
         return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.articleRoute:
-        return MaterialPageRoute(builder: (_) => NewsArticleView());
+        return MaterialPageRoute(builder: (_) => const NewsArticleView());
       default:
         return unDefinedRoute();
     }
