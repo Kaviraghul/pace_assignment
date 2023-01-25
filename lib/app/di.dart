@@ -3,6 +3,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pace_assignment/app/app_prefs.dart';
+import 'package:pace_assignment/data/data_source/local_data_source.dart';
 import 'package:pace_assignment/data/data_source/remote_data_source.dart';
 import 'package:pace_assignment/data/network/app_api.dart';
 import 'package:pace_assignment/data/network/dio_factory.dart';
@@ -26,7 +27,11 @@ Future<void> initAppModule() async {
 
   // repository class
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance()));
+      () => RepositoryImpl(instance(), instance(), instance()));
+
+  // Local repository class
+  instance.registerLazySingleton<LocalDataStorage>(
+      () => LocalDataStorageImplementer());
 
   // Dio factory class
   instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
