@@ -61,6 +61,7 @@ class _HomeViewState extends State<HomeView> {
         height: MediaQuery.of(context).size.height,
         margin: const EdgeInsets.symmetric(vertical: AppMargin.m12),
         child: ListView(
+          padding: const EdgeInsets.only(bottom: AppSize.s100),
           scrollDirection: Axis.vertical,
           children: article
               .map(
@@ -72,89 +73,16 @@ class _HomeViewState extends State<HomeView> {
                         MaterialPageRoute(
                             builder: (context) => NewsArticleView(article)),
                       ),
-                      child: Card(
-                        elevation: AppSize.s4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppSize.s12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(AppSize.s8),
+                        child: Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            _buildNewsImage(article),
+                            _buildGradient(),
+                            _buildArticleDetails(article)
+                          ],
                         ),
-                        child: Column(children: [
-                          Stack(
-                            alignment: Alignment.bottomRight,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(AppSize.s8),
-                                child: Container(
-                                  height: AppSize.s260,
-                                  width: AppSize.s400,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                    image: NetworkImage(article.urlToImage),
-                                    fit: BoxFit.cover,
-                                    // colorFilter: ColorFilter.mode(
-                                    //   ColorManager.black.withOpacity(0.5),
-                                    //   BlendMode.darken,
-                                    // ),
-                                  )),
-                                ),
-                              ),
-                              Container(
-                                height: AppSize.s260,
-                                width: AppSize.s400,
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.black,
-                                      Colors.black,
-                                      Colors.black
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    stops: [0, 0.7, 0.9, 1],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(AppPadding.p12),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      article.title,
-                                      style:
-                                          Theme.of(context).textTheme.subtitle1,
-                                    ),
-                                    const SizedBox(
-                                      height: AppSize.s12,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          article.source!.name,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle2,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(
-                                          width: AppSize.s20,
-                                        ),
-                                        Text(
-                                          dateConvertor(article.publishedAt),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle2,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        ]),
                       ),
                     ),
                     const SizedBox(
@@ -175,6 +103,72 @@ class _HomeViewState extends State<HomeView> {
         ),
       );
     }
+  }
+
+  Padding _buildArticleDetails(Article article) {
+    return Padding(
+      padding: const EdgeInsets.all(AppPadding.p12),
+      child: Column(
+        children: [
+          Text(
+            article.title,
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+          const SizedBox(
+            height: AppSize.s12,
+          ),
+          Row(
+            children: [
+              Text(
+                article.source!.name,
+                style: Theme.of(context).textTheme.subtitle2,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(
+                width: AppSize.s20,
+              ),
+              Text(
+                dateConvertor(article.publishedAt),
+                style: Theme.of(context).textTheme.subtitle2,
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Positioned _buildGradient() {
+    return const Positioned.fill(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.transparent,
+              Colors.black,
+              Colors.black,
+              Colors.black
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0, 0.7, 0.9, 1],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container _buildNewsImage(Article article) {
+    return Container(
+      height: AppSize.s260,
+      width: AppSize.s400,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+        image: NetworkImage(article.urlToImage),
+        fit: BoxFit.cover,
+      )),
+    );
   }
 
   @override
