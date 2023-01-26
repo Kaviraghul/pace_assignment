@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/di.dart';
+import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/presentation/home/home_view.dart';
+import 'package:pace_assignment/presentation/news_article/news_article_view.dart';
 import 'package:pace_assignment/presentation/resources/strings_manager.dart';
 
 class Routes {
   static const String mainRoute = "/";
+  static const String articleRoute = "/article";
 }
 
 class RouteGenerator {
