@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/constants.dart';
 import 'package:pace_assignment/app/utils.dart';
@@ -7,12 +9,13 @@ import 'package:pace_assignment/presentation/resources/routes_manager.dart';
 import 'package:pace_assignment/presentation/resources/values_manager.dart';
 
 class NewsArticleView extends StatelessWidget {
-  Article article;
-  NewsArticleView(this.article);
+  const NewsArticleView();
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.5;
+    final Article article =
+        ModalRoute.of(context)?.settings.arguments as Article;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -48,7 +51,7 @@ class NewsArticleView extends StatelessWidget {
                   ),
                 ),
               ),
-              SingleChildScrollView( 
+              SingleChildScrollView(
                 padding: const EdgeInsets.only(
                     left: AppPadding.p20, right: AppPadding.p20),
                 child: Column(
@@ -84,16 +87,15 @@ class NewsArticleView extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, left: 10),
+                margin: const EdgeInsets.only(top: 10, left: 10),
                 width: 50.0,
                 height: 50.0,
                 child: Center(
                   child: FittedBox(
                     child: FloatingActionButton(
                       backgroundColor: Colors.black.withOpacity(0.4),
-                      onPressed: () => Navigator.pushReplacementNamed(
-                          context, Routes.mainRoute),
-                      child: Icon(
+                      onPressed: () => Navigator.pop(context, Routes.mainRoute),
+                      child: const Icon(
                         Icons.arrow_back,
                         size: 40,
                       ),
