@@ -74,14 +74,18 @@ class _HomeViewState extends State<HomeView> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => NewsArticleView(article)),
+                          builder: (context) => const NewsArticleView(),
+                          settings: RouteSettings(
+                            arguments: article,
+                          ),
+                        ),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.s8),
                         child: Stack(
                           alignment: Alignment.bottomRight,
                           children: [
-                            _buildNewsImage( context, article),
+                            _buildNewsImage(context, article),
                             _buildGradient(),
                             _buildArticleDetails(article)
                           ],
