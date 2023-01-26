@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/di.dart';
+import 'package:pace_assignment/app/utils.dart';
 import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/presentation/home/home_view_model.dart';
 import 'package:pace_assignment/presentation/news_article/news_article_view.dart';
 import 'package:pace_assignment/presentation/resources/color_manager.dart';
-import 'package:pace_assignment/presentation/resources/routes_manager.dart';
 import 'package:pace_assignment/presentation/resources/strings_manager.dart';
 import 'package:pace_assignment/presentation/resources/values_manager.dart';
 
@@ -67,8 +67,11 @@ class _HomeViewState extends State<HomeView> {
                 (article) => Column(
                   children: [
                     InkWell(
-                      onTap: () => Navigator.pushReplacementNamed(
-                          context, Routes.articleRoute),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NewsArticleView(article)),
+                      ),
                       child: Card(
                         elevation: AppSize.s4,
                         shape: RoundedRectangleBorder(
@@ -139,7 +142,7 @@ class _HomeViewState extends State<HomeView> {
                                           width: AppSize.s20,
                                         ),
                                         Text(
-                                          article.publishedAt,
+                                          dateConvertor(article.publishedAt),
                                           style: Theme.of(context)
                                               .textTheme
                                               .subtitle2,
