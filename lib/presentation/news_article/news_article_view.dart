@@ -8,8 +8,27 @@ import 'package:pace_assignment/presentation/resources/color_manager.dart';
 import 'package:pace_assignment/presentation/resources/routes_manager.dart';
 import 'package:pace_assignment/presentation/resources/values_manager.dart';
 
-class NewsArticleView extends StatelessWidget {
-  const NewsArticleView();
+class NewsArticleView extends StatefulWidget {
+  NewsArticleView();
+
+  @override
+  State<NewsArticleView> createState() => _NewsArticleViewState();
+}
+
+class _NewsArticleViewState extends State<NewsArticleView> {
+  final ScrollController _scrollController = ScrollController();
+
+  double offset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      setState(() {
+        offset = _scrollController.position.pixels;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +52,10 @@ class NewsArticleView extends StatelessWidget {
                   fit: BoxFit.cover,
                 )),
               ),
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      Colors.black,
-                      Colors.black,
-                      Colors.black
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0, 0.7, 0.9, 1],
-                  ),
-                ),
-              ),
+              _getAnimatedContainer(),
+              _buildGradient(),
               SingleChildScrollView(
+                controller: _scrollController,
                 padding: const EdgeInsets.only(
                     left: AppPadding.p20, right: AppPadding.p20),
                 child: Column(
@@ -109,20 +113,48 @@ class NewsArticleView extends StatelessWidget {
       ),
     );
   }
+
+  Positioned _buildGradient() {
+    return const Positioned.fill(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.transparent,
+              Colors.black,
+              Colors.black,
+              Colors.black
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0, 0.7, 0.9, 1],
+          ),
+        ),
+      ),
+    );
+  }
+
+  AnimatedContainer _getAnimatedContainer() {
+    return AnimatedContainer(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      duration: const Duration(milliseconds: 5),
+      curve: Curves.easeInOut,
+      color: offset != null ? colorFromOffset(offset!) : Colors.black,
+    );
+  }
+
+  Color colorFromOffset(double offset) {
+    final int min = 0;
+    final int max = 400;
+    final int range = max - min;
+    final int black = (offset.clamp(min, max) * 255 / range).round();
+    return Color.fromARGB(black, 0, 0, 0);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 }
-
-
-// backgroundColor: Colors.transparent,
-//           systemOverlayStyle: ,
-//           leading: Container(
-//             width: 50.0,
-//             height: 50.0,
-//             child: Center(
-//               child: FittedBox(
-//                 child: FloatingActionButton(
-//                   onPressed: () {},
-//                   child: Icon(Icons.arrow_upward),
-//                 ),
-//               ),
-//             ),
-//           ),

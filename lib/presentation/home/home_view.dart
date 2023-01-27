@@ -72,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const NewsArticleView(),
+                          builder: (context) => NewsArticleView(),
                           settings: RouteSettings(
                             arguments: article,
                           ),
