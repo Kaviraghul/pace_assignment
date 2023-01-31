@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/app/utils.dart';
 import 'package:pace_assignment/domain/model.dart';
+import 'package:pace_assignment/presentation/home/home_style.dart';
 import 'package:pace_assignment/presentation/home/home_view_model.dart';
 import 'package:pace_assignment/presentation/news_article/news_article_view.dart';
 import 'package:pace_assignment/presentation/resources/color_manager.dart';
@@ -21,6 +22,7 @@ class _HomeViewState extends State<HomeView> {
   var _title = AppString.headlines;
 
   HomeViewModel _viewModel = instance<HomeViewModel>();
+  HomeStyle _homeStyle = instance<HomeStyle>();
 
   @override
   void initState() {
@@ -140,21 +142,9 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Positioned _buildGradient() {
-    return const Positioned.fill(
+    return Positioned.fill(
       child: DecoratedBox(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.transparent,
-              Colors.black,
-              Colors.black,
-              Colors.black
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0, 0.7, 0.9, 1],
-          ),
-        ),
+        decoration: _homeStyle.animationBackDrop,
       ),
     );
   }
