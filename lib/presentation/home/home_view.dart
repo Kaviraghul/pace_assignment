@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_final_fields, sized_box_for_whitespace
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/app/utils.dart';
@@ -80,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                         child: Stack(
                           alignment: Alignment.bottomRight,
                           children: [
-                            _buildNewsImage(article),
+                            _buildNewsImage( context, article),
                             _buildGradient(),
                             _buildArticleDetails(article)
                           ],
@@ -149,15 +150,21 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Container _buildNewsImage(Article article) {
-    return Container(
-      height: AppSize.s260,
-      width: AppSize.s400,
-      decoration: BoxDecoration(
+  CachedNetworkImage _buildNewsImage(BuildContext context, Article article) {
+    return CachedNetworkImage(
+      imageUrl: article.urlToImage,
+      imageBuilder: (context, imageProvider) => Container(
+        width: AppSize.s400,
+        height: AppSize.s260,
+        decoration: BoxDecoration(
           image: DecorationImage(
-        image: NetworkImage(article.urlToImage),
-        fit: BoxFit.cover,
-      )),
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 
