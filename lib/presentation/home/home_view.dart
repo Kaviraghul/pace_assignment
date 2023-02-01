@@ -3,9 +3,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/app/utils.dart';
 import 'package:pace_assignment/domain/model.dart';
+import 'package:pace_assignment/gen/assets.gen.dart';
 import 'package:pace_assignment/presentation/home/home_style.dart';
 import 'package:pace_assignment/presentation/home/home_view_model.dart';
 import 'package:pace_assignment/presentation/resources/color_manager.dart';
@@ -22,6 +24,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   var _title = AppString.headlines;
+  final _assets = Assets.json;
 
   HomeViewModel _viewModel = instance<HomeViewModel>();
   SelectedArticle _selectedArticle = instance<SelectedArticle>();
@@ -100,10 +103,10 @@ class _HomeViewState extends State<HomeView> {
       );
     } else {
       return Container(
-        width: 100,
-        height: 100,
-        child: const Center(
-          child: Text("null"),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Center(
+          child: Lottie.asset(_assets.newsLoader.path),
         ),
       );
     }
@@ -164,8 +167,16 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      placeholder: (context, url) => const CircularProgressIndicator(),
+      placeholder: (context, url) => _getPlaceholderCard(),
       errorWidget: (context, url, error) => const Icon(Icons.error),
+    );
+  }
+
+  Container _getPlaceholderCard() {
+    return Container(
+      width: AppSize.s400,
+      height: AppSize.s260,
+      color: Colors.black,
     );
   }
 
