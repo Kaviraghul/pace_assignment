@@ -4,5 +4,4 @@ import 'package:pace_assignment/domain/model.dart';
 
 abstract class Repository {
   Future<Either<Failure, Home>> getNews();
-  // Future<Either<Failure, SelectedArticle>> getSelectedArticle();
 }

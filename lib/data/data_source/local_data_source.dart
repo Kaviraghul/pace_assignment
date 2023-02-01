@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, prefer_collection_literals
 
 import 'package:pace_assignment/data/network/error_handler.dart';
 import 'package:pace_assignment/data/responses/responses.dart';

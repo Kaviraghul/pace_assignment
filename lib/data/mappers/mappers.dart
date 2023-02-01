@@ -41,18 +41,3 @@ extension NewsResponseMapper on HomeResponce? {
     return Home(mappedArticles);
   }
 }
-
-extension SelectedArticleMapper on SelectedArticleResponse? {
-  SelectedArticle toDomain() {
-    return SelectedArticle(
-      this?.source?.toDomain(),
-      this?.author?.orEmpty() ?? EMPTY,
-      this?.title?.orEmpty() ?? EMPTY,
-      this?.description?.orEmpty() ?? EMPTY,
-      this?.url?.orEmpty() ?? EMPTY,
-      this?.urlToImage?.orEmpty() ?? EMPTY,
-      this?.publishedAt?.orEmpty() ?? EMPTY,
-      this?.content?.orEmpty() ?? EMPTY,
-    );
-  }
-}

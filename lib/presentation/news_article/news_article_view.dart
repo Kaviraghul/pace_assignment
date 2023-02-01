@@ -1,7 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pace_assignment/app/constants.dart';
+import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/app/utils.dart';
 import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/presentation/resources/color_manager.dart';
@@ -9,7 +11,7 @@ import 'package:pace_assignment/presentation/resources/routes_manager.dart';
 import 'package:pace_assignment/presentation/resources/values_manager.dart';
 
 class NewsArticleView extends StatefulWidget {
-  NewsArticleView();
+  const NewsArticleView();
 
   @override
   State<NewsArticleView> createState() => _NewsArticleViewState();
@@ -17,8 +19,9 @@ class NewsArticleView extends StatefulWidget {
 
 class _NewsArticleViewState extends State<NewsArticleView> {
   final ScrollController _scrollController = ScrollController();
+  final SelectedArticle _selectedArticle = instance<SelectedArticle>();
 
-  late double offset;
+  double offset = 0;
 
   @override
   void initState() {
@@ -33,8 +36,6 @@ class _NewsArticleViewState extends State<NewsArticleView> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 0.5;
-    final Article article =
-        ModalRoute.of(context)?.settings.arguments as Article;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -48,7 +49,8 @@ class _NewsArticleViewState extends State<NewsArticleView> {
                 height: double.infinity,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: NetworkImage(article.urlToImage),
+                  image: NetworkImage(
+                      _selectedArticle.selectedArticle!.urlToImage),
                   fit: BoxFit.cover,
                 )),
               ),
@@ -64,7 +66,7 @@ class _NewsArticleViewState extends State<NewsArticleView> {
                       height: height,
                     ),
                     Text(
-                      article.title,
+                      _selectedArticle.selectedArticle!.title,
                       style: Theme.of(context).textTheme.caption,
                     ),
                     const SizedBox(
@@ -73,9 +75,11 @@ class _NewsArticleViewState extends State<NewsArticleView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(article.source!.name,
+                        Text(_selectedArticle.selectedArticle!.source!.name,
                             style: Theme.of(context).textTheme.headline6),
-                        Text(dateConvertor(article.publishedAt),
+                        Text(
+                            dateConvertor(
+                                _selectedArticle.selectedArticle!.publishedAt),
                             style: Theme.of(context).textTheme.headline6),
                       ],
                     ),
@@ -98,7 +102,7 @@ class _NewsArticleViewState extends State<NewsArticleView> {
                   child: FittedBox(
                     child: FloatingActionButton(
                       backgroundColor: Colors.black.withOpacity(0.4),
-                      onPressed: () => Navigator.pop(context, Routes.mainRoute),
+                      onPressed: () => context.go(Routes.mainRoute),
                       child: const Icon(
                         Icons.arrow_back,
                         size: 40,

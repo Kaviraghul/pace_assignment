@@ -3,7 +3,6 @@
 import 'package:dio/dio.dart';
 import 'package:pace_assignment/app/constants.dart';
 import 'package:pace_assignment/data/responses/responses.dart';
-import 'package:pace_assignment/domain/model.dart';
 import 'package:retrofit/http.dart';
 
 part 'app_api.g.dart';

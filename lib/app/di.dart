@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
+// ignore_for_file: import_of_legacy_library_into_null_safe, unused_local_variable
 
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
@@ -10,6 +10,7 @@ import 'package:pace_assignment/data/network/dio_factory.dart';
 import 'package:pace_assignment/data/network/network_info.dart';
 import 'package:pace_assignment/data/repository/repository.dart';
 import 'package:pace_assignment/domain/home_usecase.dart';
+import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/domain/repository.dart';
 import 'package:pace_assignment/presentation/home/home_view_model.dart';
 
@@ -39,6 +40,8 @@ Future<void> initAppModule() async {
   // App service class
   final dio = await instance<DioFactory>().getDio();
   instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
+
+  instance.registerSingleton<SelectedArticle>(SelectedArticle());
 }
 
 initHomeModule() {

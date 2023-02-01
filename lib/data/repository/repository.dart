@@ -44,6 +44,4 @@ class RepositoryImpl extends Repository {
       }
     }
   }
-  
- 
 }

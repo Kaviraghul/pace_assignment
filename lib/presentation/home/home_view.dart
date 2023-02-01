@@ -2,13 +2,14 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pace_assignment/app/di.dart';
 import 'package:pace_assignment/app/utils.dart';
 import 'package:pace_assignment/domain/model.dart';
 import 'package:pace_assignment/presentation/home/home_style.dart';
 import 'package:pace_assignment/presentation/home/home_view_model.dart';
-import 'package:pace_assignment/presentation/news_article/news_article_view.dart';
 import 'package:pace_assignment/presentation/resources/color_manager.dart';
+import 'package:pace_assignment/presentation/resources/routes_manager.dart';
 import 'package:pace_assignment/presentation/resources/strings_manager.dart';
 import 'package:pace_assignment/presentation/resources/values_manager.dart';
 
@@ -23,6 +24,7 @@ class _HomeViewState extends State<HomeView> {
   var _title = AppString.headlines;
 
   HomeViewModel _viewModel = instance<HomeViewModel>();
+  SelectedArticle _selectedArticle = instance<SelectedArticle>();
   HomeStyle _homeStyle = HomeStyle();
 
   @override
@@ -71,15 +73,10 @@ class _HomeViewState extends State<HomeView> {
                 (article) => Column(
                   children: [
                     InkWell(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NewsArticleView(),
-                          settings: RouteSettings(
-                            arguments: article,
-                          ),
-                        ),
-                      ),
+                      onTap: () {
+                        _selectedArticle.update(article);
+                        context.go(Routes.articleRoute);
+                      },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.s8),
                         child: Stack(
