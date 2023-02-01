@@ -18,7 +18,7 @@ class NewsArticleView extends StatefulWidget {
 class _NewsArticleViewState extends State<NewsArticleView> {
   final ScrollController _scrollController = ScrollController();
 
-  double offset = 0;
+  late double offset;
 
   @override
   void initState() {
@@ -140,14 +140,14 @@ class _NewsArticleViewState extends State<NewsArticleView> {
       height: MediaQuery.of(context).size.height,
       duration: const Duration(milliseconds: 5),
       curve: Curves.easeInOut,
-      color: offset != null ? colorFromOffset(offset!) : Colors.black,
+      color: colorFromOffset(offset),
     );
   }
 
   Color colorFromOffset(double offset) {
-    final int min = 0;
-    final int max = 400;
-    final int range = max - min;
+    const int min = 0;
+    const int max = 400;
+    const int range = max - min;
     final int black = (offset.clamp(min, max) * 255 / range).round();
     return Color.fromARGB(black, 0, 0, 0);
   }

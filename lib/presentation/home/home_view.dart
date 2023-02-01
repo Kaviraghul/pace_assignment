@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
   var _title = AppString.headlines;
 
   HomeViewModel _viewModel = instance<HomeViewModel>();
-  HomeStyle _homeStyle = instance<HomeStyle>();
+  HomeStyle _homeStyle = HomeStyle();
 
   @override
   void initState() {
